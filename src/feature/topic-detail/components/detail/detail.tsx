@@ -1,7 +1,12 @@
 import React from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import navigationServices from '../../../../routers/navigation-services';
+import * as screenName from '../../../../routers/screen-name';
 
+const gotoRegister = () => {
+  navigationServices.navigate(screenName.RegisterScreen);
+};
 export const DetailTopic = () => {
   return (
     <View style={styles.container}>
@@ -45,10 +50,17 @@ export const DetailTopic = () => {
           </Text>
         </View>
       </View>
-      <View style={styles.btn_ctn}>
-        <TouchableOpacity style={styles.btn}>
-          <Text style={styles.btn_text}>Huỷ</Text>
-        </TouchableOpacity>
+      <View style={styles.btns}>
+        <View style={styles.btn_ctn}>
+          <TouchableOpacity style={styles.btn}>
+            <Text style={styles.btn_text}>Đăng kí</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.btn_ctn}>
+          <TouchableOpacity style={styles.btn} onPress={gotoRegister}>
+            <Text style={styles.btn_text}>Huỷ</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -67,9 +79,15 @@ const styles = StyleSheet.create({
   item_text: {
     marginHorizontal: 16,
     width: '30%',
+    fontWeight: 'bold',
   },
   item_content: {
     width: '60%',
+  },
+  btns: {
+    flexDirection: 'row',
+    marginHorizontal: 84,
+    marginVertical: 16,
   },
   btn_ctn: {
     alignItems: 'center',
@@ -81,6 +99,7 @@ const styles = StyleSheet.create({
     paddingVertical: 4,
     backgroundColor: '#D34848',
     borderRadius: 16,
+    marginHorizontal: 16,
   },
   btn_text: {
     color: '#fff',

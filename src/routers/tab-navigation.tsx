@@ -7,6 +7,7 @@ import {SvgXml} from 'react-native-svg';
 import colors from '../res/colors';
 import {ProposeScreen} from '../feature/propose';
 import {ReportScreen} from '../feature/report';
+import {UserDetailScreen} from '../feature/user';
 
 export const BottomNavigationTab = createMaterialBottomTabNavigator(
   {
@@ -16,8 +17,8 @@ export const BottomNavigationTab = createMaterialBottomTabNavigator(
         title: 'Đăng ký',
         tabBarIcon: ({focused}) => {
           const xml = focused
-            ? svgs.tab_navigation.home.select
-            : svgs.tab_navigation.home.unselect;
+            ? svgs.tab_navigation.register.select
+            : svgs.tab_navigation.register.unselect;
           return <SvgXml height={20} width={20} xml={xml} />;
         },
       }),
@@ -28,8 +29,8 @@ export const BottomNavigationTab = createMaterialBottomTabNavigator(
         title: 'Đề xuất',
         tabBarIcon: ({focused}) => {
           const xml = focused
-            ? svgs.tab_navigation.setting.select
-            : svgs.tab_navigation.setting.unselect;
+            ? svgs.tab_navigation.propose.select
+            : svgs.tab_navigation.propose.unselect;
           return <SvgXml height={20} width={20} xml={xml} />;
         },
       }),
@@ -40,8 +41,20 @@ export const BottomNavigationTab = createMaterialBottomTabNavigator(
         title: 'Báo cáo',
         tabBarIcon: ({focused}) => {
           const xml = focused
-            ? svgs.tab_navigation.profile.select
-            : svgs.tab_navigation.profile.unselect;
+            ? svgs.tab_navigation.report.select
+            : svgs.tab_navigation.report.unselect;
+          return <SvgXml height={20} width={20} xml={xml} />;
+        },
+      }),
+    },
+    [screenName.UserScreen]: {
+      screen: UserDetailScreen,
+      navigationOptions: () => ({
+        title: 'Cá nhân',
+        tabBarIcon: ({focused}) => {
+          const xml = focused
+            ? svgs.tab_navigation.user.select
+            : svgs.tab_navigation.user.unselect;
           return <SvgXml height={20} width={20} xml={xml} />;
         },
       }),

@@ -33,7 +33,7 @@ export const ListTopicComponent = () => {
         </View>
         <View style={styles.btn_ctn}>
           <TouchableOpacity style={styles.btn} onPress={gotoTopicDetail}>
-            <Text style={styles.btn_text}>Đăng ký</Text>
+            <Text style={styles.btn_text}>Chi Tiết</Text>
           </TouchableOpacity>
         </View>
       </View>

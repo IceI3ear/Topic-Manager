@@ -14,8 +14,7 @@ const colors = {
   focus: '#fe6700',
   mint: '#7adab1',
 
-
-  white_50: 'rgba(255,255,255,0.5)'
+  white_50: 'rgba(255,255,255,0.5)',
 };
 
 export default colors;
