@@ -1,3 +1,3 @@
-import {UserContainer} from './components/UserScreen';
+import {UserContainer} from './view/UserScreen';
 
-export const UserDetailScreen = UserContainer;
+export const UserScreen = UserContainer;

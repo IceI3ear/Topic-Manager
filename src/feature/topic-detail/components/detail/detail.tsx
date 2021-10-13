@@ -1,61 +1,64 @@
 import React from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import {useRecoilState} from 'recoil';
+import {isCheckRegister} from '../../../../recoil/recoil-state';
 import navigationServices from '../../../../routers/navigation-services';
 import * as screenName from '../../../../routers/screen-name';
+import {ITopic} from '../../../../types';
+
+interface IDetaiTopicProps {
+  itemRowDetail: ITopic;
+}
 
 const gotoRegister = () => {
   navigationServices.navigate(screenName.RegisterScreen);
 };
-export const DetailTopic = () => {
+export const DetailTopic = (props: IDetaiTopicProps) => {
+  const {itemRowDetail} = props;
+  const isCheck = useRecoilState(isCheckRegister);
   return (
     <View style={styles.container}>
       <View style={styles.item_row}>
         <Text style={styles.item_text}>Mã Đề Tài</Text>
-        <Text style={styles.item_content}>DTC101</Text>
+        <Text style={styles.item_content}>{itemRowDetail.id}</Text>
       </View>
       <View style={styles.item_row}>
         <Text style={styles.item_text}>TÊN ĐỀ TÀI</Text>
-        <Text style={styles.item_content}>
-          Xây dựng ứng dụng tìm phòng trọ trên thiết bị di động
-        </Text>
+        <Text style={styles.item_content}>{itemRowDetail.topicName}</Text>
       </View>
       <View style={styles.item_row}>
         <Text style={styles.item_text}>GVHD</Text>
-        <Text style={styles.item_content}>ThS.Lê Bá Cường</Text>
+        <Text style={styles.item_content}>{itemRowDetail.teacher}</Text>
       </View>
       <View style={styles.item_row}>
         <Text style={styles.item_text}>LIÊN HỆ GVHD</Text>
-        <Text style={styles.item_content}>DTC101</Text>
+        <Text style={styles.item_content}>024 3854 4244</Text>
       </View>
       <View style={styles.item_row}>
         <Text style={styles.item_text}>MÔ TẢ ĐT</Text>
-        <Text style={styles.item_content}>
-          Đề tài xây dựng ứng dụng tìm nhà trọ cho phép sinh viên sử dụng các
-          ngôn ngữ khác nhau và áp dụng các kiến thức đã học cùng với kinh
-          nghiệm thực tập để sinh viên xây dựng ứng dụng .
-        </Text>
+        <Text style={styles.item_content}>{itemRowDetail.description}</Text>
       </View>
       <View style={styles.item_row}>
         <Text style={styles.item_text}>TÀI LIỆU THAM KHẢO</Text>
-        <View>
-          <Text style={styles.item_content}>
-            Android Programming for Beginners. ...
-          </Text>
-          <Text style={styles.item_content}>
-            Head First Android Development. ...
-          </Text>
-          <Text style={styles.item_content}>
-            Beginning Android 4 Application Development. ...
-          </Text>
+        <View style={styles.item_link}>
+          <Text style={styles.item_content}>{itemRowDetail.linkFile}</Text>
         </View>
       </View>
       <View style={styles.btns}>
-        <View style={styles.btn_ctn}>
-          <TouchableOpacity style={styles.btn}>
-            <Text style={styles.btn_text}>Đăng kí</Text>
-          </TouchableOpacity>
-        </View>
+        {!isCheck[0] ? (
+          <View style={styles.btn_ctn}>
+            <TouchableOpacity style={styles.btn}>
+              <Text style={styles.btn_text}>Đăng kí</Text>
+            </TouchableOpacity>
+          </View>
+        ) : (
+          <View style={styles.btn_ctn}>
+            <TouchableOpacity style={styles.btn_fail}>
+              <Text style={styles.btn_text}>Đăng kí</Text>
+            </TouchableOpacity>
+          </View>
+        )}
         <View style={styles.btn_ctn}>
           <TouchableOpacity style={styles.btn} onPress={gotoRegister}>
             <Text style={styles.btn_text}>Huỷ</Text>
@@ -103,5 +106,15 @@ const styles = StyleSheet.create({
   },
   btn_text: {
     color: '#fff',
+  },
+  item_link: {
+    width: 350,
+  },
+  btn_fail: {
+    paddingHorizontal: 28,
+    paddingVertical: 4,
+    backgroundColor: '#95a5a6',
+    borderRadius: 16,
+    marginHorizontal: 16,
   },
 });

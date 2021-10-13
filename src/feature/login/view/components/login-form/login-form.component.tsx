@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useState} from 'react';
+import axios from 'axios';
 import {
   KeyboardAvoidingView,
   ScrollView,
@@ -15,27 +16,48 @@ import {RefObject} from '../../../../../libraries/text-field/ref-props';
 import {TextField} from '../../../../../libraries/text-field/text-field';
 import colors from '../../../../../res/colors';
 import svgs from '../../../../../res/svgs';
+import {ILogin} from '../../../../../types';
 
+import {useRecoilState} from 'recoil';
+import {userInfo} from '../../../../../recoil/recoil-state';
 interface Props {
   gotoHome: any;
 }
 
 export const LoginFormComponent = (props: Props) => {
+  const [errorCount, setErrorCount] = useState<number>(0);
   const {gotoHome} = props;
   const refTxtUsername = React.useRef<RefObject>(null);
   const refTxtPass = React.useRef<RefObject>(null);
 
+  const [user, setUser] = useRecoilState(userInfo);
+
   const login = () => {
-    // const email = refTxtUsername.current?.getValue();
-    // const password = refTxtPass.current?.getValue();
-    // const data = {
-    //   userName: email,
-    //   passWord: password,
-    // };
-
-    gotoHome();
+    const email = refTxtUsername.current?.getValue();
+    const password = refTxtPass.current?.getValue();
+    const userLogin: ILogin = {
+      user: email,
+      password: password,
+    };
+    axios
+      .post('http://192.168.1.3:5000/api/Authentication/Login', {
+        userName: userLogin.user,
+        password: userLogin.password,
+      })
+      .then(res => {
+        console.log('Result: ', res);
+        if (res.status === 200) {
+          setErrorCount(0);
+          console.log(user);
+          setUser(res.data);
+          gotoHome();
+        }
+      })
+      .catch(error => {
+        console.log('ERROR API: ', error);
+        setErrorCount(1);
+      });
   };
-
   return (
     <ScrollView
       contentContainerStyle={{flexGrow: 1}}
@@ -63,7 +85,13 @@ export const LoginFormComponent = (props: Props) => {
             lable={'Mật khẩu'}
             passInput={true}
           />
-
+          {errorCount === 1 ? (
+            <View>
+              <Text style={styles.text_error}>
+                Vui lòng nhập chính xác tên và mật khẩu
+              </Text>
+            </View>
+          ) : null}
           <TouchableOpacity style={{width: '100%'}} onPress={login}>
             <LinearGradient
               colors={[colors.orange, colors.yellow]}
@@ -177,5 +205,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     borderColor: '#4080FF',
     marginHorizontal: 10,
+  },
+  text_error: {
+    color: 'red',
+    paddingTop: 20,
   },
 });

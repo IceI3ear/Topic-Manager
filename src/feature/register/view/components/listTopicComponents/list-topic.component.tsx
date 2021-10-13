@@ -4,37 +4,64 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import colors from '../../../../../res/colors';
 import navigationServices from '../../../../../routers/navigation-services';
 import * as screenName from '../../../../../routers/screen-name';
+import {ITopic} from '../../../../../types';
+import {useRecoilState} from 'recoil';
+import {
+  isCheckRegister,
+  topicUser,
+  userInfo,
+} from '../../../../../recoil/recoil-state';
 
-export const ListTopicComponent = () => {
-  const data = [1, 2, 3, 4];
+interface Props {
+  dataTopic: ITopic;
+}
 
-  const gotoTopicDetail = () => {
-    navigationServices.navigate(screenName.TopicDetailScreen);
+export const ListTopicComponent = (props: Props) => {
+  const {dataTopic} = props;
+  const [isCheck, setIsCheck] = useRecoilState<boolean>(isCheckRegister);
+  const [topicUserProp, setTopicUserProp] = useRecoilState(topicUser);
+  const user: any = useRecoilState(userInfo);
+
+  const gotoTopicDetail = (itemRow: ITopic) => {
+    navigationServices.navigate(screenName.TopicDetailScreen, {value: itemRow});
   };
+  const result: any = Object.values(dataTopic).find(
+    ed => ed.studentID === user[0].id,
+  );
+  result ? setIsCheck(true) : setIsCheck(false);
+  setTopicUserProp(result);
+  console.log('topicUserProp: ', topicUserProp);
+  console.log('isCheck: ', isCheck);
 
-  const renderItem = () => {
+  const renderItem = (item: ITopic) => {
     return (
       <View style={styles.item_ctn}>
         <View style={styles.item_des_ctn}>
           <View style={styles.des_row}>
-            <Text style={styles.des_label}>Ma DT</Text>
-            <Text>DTCT001</Text>
+            <Text style={styles.des_label}>Ma de tai</Text>
+            <Text>{item.id}</Text>
           </View>
           <View style={styles.des_row}>
             <Text style={styles.des_label}>Ten de tai</Text>
-            <Text style={styles.des_content}>
-              Xây dựng ứng dụng tìm phòng trọ trên thiết bị di động{' '}
-            </Text>
+            <Text style={styles.des_content}>{item.topicName}</Text>
           </View>
           <View style={styles.des_row}>
             <Text style={styles.des_label}>GVHD</Text>
-            <Text>ThS.Lê Bá Cường</Text>
+            <Text>{item.teacher}</Text>
           </View>
         </View>
         <View style={styles.btn_ctn}>
-          <TouchableOpacity style={styles.btn} onPress={gotoTopicDetail}>
-            <Text style={styles.btn_text}>Chi Tiết</Text>
-          </TouchableOpacity>
+          {item.studentID === null ? (
+            <TouchableOpacity
+              style={styles.btn}
+              onPress={() => gotoTopicDetail(item)}>
+              <Text style={styles.btn_text}>Chi Tiết</Text>
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity style={styles.btn_fail}>
+              <Text style={styles.btn_text}>Chi Tiết</Text>
+            </TouchableOpacity>
+          )}
         </View>
       </View>
     );
@@ -42,7 +69,7 @@ export const ListTopicComponent = () => {
 
   return (
     <View style={styles.container}>
-      <FlatList data={data} renderItem={renderItem} />
+      <FlatList data={dataTopic} renderItem={({item}) => renderItem(item)} />
     </View>
   );
 };
@@ -85,6 +112,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 4,
     backgroundColor: '#D34848',
+    borderRadius: 16,
+  },
+  btn_fail: {
+    marginLeft: 4,
+    paddingHorizontal: 12,
+    paddingVertical: 4,
+    backgroundColor: '#95a5a6',
     borderRadius: 16,
   },
   btn_text: {

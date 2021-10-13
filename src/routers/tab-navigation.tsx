@@ -7,7 +7,7 @@ import {SvgXml} from 'react-native-svg';
 import colors from '../res/colors';
 import {ProposeScreen} from '../feature/propose';
 import {ReportScreen} from '../feature/report';
-import {UserDetailScreen} from '../feature/user';
+import {UserScreen} from '../feature/user';
 
 export const BottomNavigationTab = createMaterialBottomTabNavigator(
   {
@@ -48,7 +48,7 @@ export const BottomNavigationTab = createMaterialBottomTabNavigator(
       }),
     },
     [screenName.UserScreen]: {
-      screen: UserDetailScreen,
+      screen: UserScreen,
       navigationOptions: () => ({
         title: 'Cá nhân',
         tabBarIcon: ({focused}) => {

@@ -18,7 +18,6 @@ export const LoginContainer = () => {
   );
 };
 
-//Styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
