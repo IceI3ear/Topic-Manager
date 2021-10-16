@@ -1,34 +1,29 @@
 import React from 'react';
 import {Text, View, FlatList, StyleSheet, TouchableOpacity} from 'react-native';
-import navigationServices from '../../../../../routers/navigation-services';
-import * as screenName from '../../../../../routers/screen-name';
 
-export const ReportContent = () => {
+export const ProgressContent = () => {
   const data = [1, 2, 3];
 
-  const gotoFormReport = () => {
-    navigationServices.navigate(screenName.FormReportScreen);
-  };
   const renderItem = () => {
     return (
       <View style={styles.content}>
         <View style={styles.data_text}>
           <View style={styles.data}>
-            <Text style={styles.data_name}>Ngày:</Text>
-            <Text style={styles.data_des}>18/9/2021</Text>
+            <Text style={styles.data_name}>MÃ ĐT</Text>
+            <Text style={styles.data_des}>123</Text>
           </View>
           <View style={styles.data}>
-            <Text style={styles.data_name}>Nội dung:</Text>
-            <Text style={styles.data_des}>Nộp đề cương</Text>
+            <Text style={styles.data_name}>TÊN ĐỀ TÀI</Text>
+            <Text style={styles.data_des}>456</Text>
           </View>
           <View style={styles.data}>
-            <Text style={styles.data_name}>Tiến độ:</Text>
-            <Text style={styles.data_des}>20%</Text>
+            <Text style={styles.data_name}>TÊN SV</Text>
+            <Text style={styles.data_des}>789</Text>
           </View>
         </View>
         <View style={styles.btn_ctn}>
-          <TouchableOpacity style={styles.btn} onPress={gotoFormReport}>
-            <Text style={styles.btn_text}>Nộp</Text>
+          <TouchableOpacity style={styles.btn}>
+            <Text style={styles.btn_text}>Chi Tiết</Text>
           </TouchableOpacity>
         </View>
       </View>

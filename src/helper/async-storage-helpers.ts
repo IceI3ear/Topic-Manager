@@ -4,8 +4,7 @@ export enum StorageKey {
   USER_INFO = 'USER_INFO',
   DEVICE_INFO = 'DEVICE_INFO',
   DOMAIN_COMPANY = 'DOMAIN_COMPANY',
-  //
-  VIDEO_CALL_INFO = 'VIDEO_CALL_INFO'
+  VIDEO_CALL_INFO = 'VIDEO_CALL_INFO',
 }
 
 function save(key: StorageKey, value: any) {

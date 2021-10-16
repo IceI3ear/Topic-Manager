@@ -12,3 +12,5 @@ export const TopicDetailScreen = 'TopicDetailScreen';
 export const FormReportScreen = 'FormReportScreen';
 export const UserScreen = 'UserScreen';
 export const TopicUserScreen = 'TopicUserScreen';
+export const AcpectTopicScreen = 'AcpectTopicScreen';
+export const ProgressScreen = 'ProgressScreen';

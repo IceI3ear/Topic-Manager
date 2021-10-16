@@ -6,15 +6,21 @@ import {userInfo} from '../../../recoil/recoil-state';
 import {DetailUser} from './components/detail/detail';
 
 export const UserContainer = () => {
-  const user = useRecoilState(userInfo);
+  const user: any = useRecoilState(userInfo);
+  const type: number = user[0].type;
 
   useEffect(() => {
     console.log('User Info : ', user);
   }, [user]);
 
-  return (
+  return type === 1 ? (
     <View style={styles.container}>
       <HeaderTitleComponent title="THÔNG TIN SINH VIêN" onback={true} />
+      <DetailUser user={user[0]} />
+    </View>
+  ) : (
+    <View style={styles.container}>
+      <HeaderTitleComponent title="THÔNG TIN GIẢNG VIÊN" onback={true} />
       <DetailUser user={user[0]} />
     </View>
   );

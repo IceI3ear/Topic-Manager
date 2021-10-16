@@ -6,6 +6,15 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
+import * as screenName from '../../../../../routers/screen-name';
+import navigationServices from '../../../../../routers/navigation-services';
+
+const gotoAcpectTopic = () => {
+  navigationServices.navigate(screenName.AcpectTopicScreen);
+};
+const gotoProgress = () => {
+  navigationServices.navigate(screenName.ProgressScreen);
+};
 
 export const AddFormComponent = () => {
   return (
@@ -25,6 +34,16 @@ export const AddFormComponent = () => {
       <View style={styles.btn_ctn}>
         <TouchableOpacity style={styles.btn}>
           <Text style={styles.btn_text}>Đề xuất</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.btn_ctn}>
+        <TouchableOpacity style={styles.btn} onPress={() => gotoAcpectTopic()}>
+          <Text style={styles.btn_text}>Phe duyet de tai</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.btn_ctn}>
+        <TouchableOpacity style={styles.btn} onPress={() => gotoProgress()}>
+          <Text style={styles.btn_text}>Theo doi tien do</Text>
         </TouchableOpacity>
       </View>
     </View>

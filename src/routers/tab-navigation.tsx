@@ -38,7 +38,7 @@ export const BottomNavigationTab = createMaterialBottomTabNavigator(
     [screenName.ReportScreen]: {
       screen: ReportScreen,
       navigationOptions: () => ({
-        title: 'Báo cáo',
+        title: 'Tiến độ',
         tabBarIcon: ({focused}) => {
           const xml = focused
             ? svgs.tab_navigation.report.select

@@ -20,6 +20,10 @@ import {ILogin} from '../../../../../types';
 
 import {useRecoilState} from 'recoil';
 import {userInfo} from '../../../../../recoil/recoil-state';
+import {URL_API} from '../../../../../helper/app-config';
+import asyncStorageHelpers, {
+  StorageKey,
+} from '../../../../../helper/async-storage-helpers';
 interface Props {
   gotoHome: any;
 }
@@ -40,16 +44,17 @@ export const LoginFormComponent = (props: Props) => {
       password: password,
     };
     axios
-      .post('http://192.168.1.3:5000/api/Authentication/Login', {
+      .post(URL_API + '/api/Authentication/Login', {
         userName: userLogin.user,
         password: userLogin.password,
       })
       .then(res => {
-        console.log('Result: ', res);
+        console.log('Result: ', res.data);
         if (res.status === 200) {
           setErrorCount(0);
           console.log(user);
           setUser(res.data);
+          asyncStorageHelpers.saveObject(StorageKey.USER_INFO, res.data);
           gotoHome();
         }
       })

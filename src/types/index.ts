@@ -5,9 +5,9 @@ export interface ITopic {
   specialityName: string;
   status: boolean;
   student: string;
-  teacher: string;
   topicName: string;
   studentID: string;
+  teacherName: string;
 }
 
 export interface ILogin {

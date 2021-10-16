@@ -20,3 +20,20 @@ const topicUser = atom({
   default: undefined,
 });
 export {topicUser};
+
+const TOPIC_DATA = 'TOPIC_DATA';
+const topicData = atom({
+  key: TOPIC_DATA,
+  default: {
+    description: '',
+    id: 0,
+    linkFile: '',
+    specialityName: '',
+    status: true,
+    student: '',
+    teacherName: '',
+    topicName: '',
+    studentID: '',
+  },
+});
+export {topicData};

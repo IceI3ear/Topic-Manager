@@ -30,11 +30,15 @@ export const ListTopicComponent = (props: Props) => {
   );
   result ? setIsCheck(true) : setIsCheck(false);
   setTopicUserProp(result);
+
+  const type: number = user[0].type;
+  console.log('Typeeeee : ', type);
+  console.log('result: ', result);
   console.log('topicUserProp: ', topicUserProp);
   console.log('isCheck: ', isCheck);
 
   const renderItem = (item: ITopic) => {
-    return (
+    return type === 1 ? (
       <View style={styles.item_ctn}>
         <View style={styles.item_des_ctn}>
           <View style={styles.des_row}>
@@ -47,7 +51,7 @@ export const ListTopicComponent = (props: Props) => {
           </View>
           <View style={styles.des_row}>
             <Text style={styles.des_label}>GVHD</Text>
-            <Text>{item.teacher}</Text>
+            <Text>{item.teacherName}</Text>
           </View>
         </View>
         <View style={styles.btn_ctn}>
@@ -64,12 +68,39 @@ export const ListTopicComponent = (props: Props) => {
           )}
         </View>
       </View>
+    ) : (
+      <View style={styles.item_ctn}>
+        <View style={styles.item_des_ctn}>
+          <View style={styles.des_row}>
+            <Text style={styles.des_label}>Ma de tai</Text>
+            <Text>{item.id}</Text>
+          </View>
+          <View style={styles.des_row}>
+            <Text style={styles.des_label}>Ten de tai</Text>
+            <Text style={styles.des_content}>{item.topicName}</Text>
+          </View>
+          <View style={styles.des_row}>
+            <Text style={styles.des_label}>GVHD</Text>
+            <Text>{item.teacherName}</Text>
+          </View>
+        </View>
+        <View style={styles.btn_ctn}>
+          <TouchableOpacity
+            style={styles.btn}
+            onPress={() => gotoTopicDetail(item)}>
+            <Text style={styles.btn_text}>Chi Tiết</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
     );
   };
 
   return (
     <View style={styles.container}>
-      <FlatList data={dataTopic} renderItem={({item}) => renderItem(item)} />
+      <FlatList
+        data={Object(dataTopic)}
+        renderItem={({item}) => renderItem(item)}
+      />
     </View>
   );
 };
