@@ -15,12 +15,12 @@ export const UserContainer = () => {
 
   return type === 1 ? (
     <View style={styles.container}>
-      <HeaderTitleComponent title="THÔNG TIN SINH VIêN" onback={true} />
+      <HeaderTitleComponent title="THÔNG TIN SINH VIêN" onback={false} />
       <DetailUser user={user[0]} />
     </View>
   ) : (
     <View style={styles.container}>
-      <HeaderTitleComponent title="THÔNG TIN GIẢNG VIÊN" onback={true} />
+      <HeaderTitleComponent title="THÔNG TIN GIẢNG VIÊN" onback={false} />
       <DetailUser user={user[0]} />
     </View>
   );
