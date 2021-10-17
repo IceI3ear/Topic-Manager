@@ -1,37 +1,40 @@
 import axios from 'axios';
 import React, {useEffect, useState} from 'react';
-import {Text, View, FlatList, StyleSheet, TouchableOpacity} from 'react-native';
-import {useRecoilState} from 'recoil';
-import {URL_API} from '../../../../../helper/app-config';
-import {userInfo} from '../../../../../recoil/recoil-state';
-import navigationServices from '../../../../../routers/navigation-services';
+import {Text, View, StyleSheet, TouchableOpacity, FlatList} from 'react-native';
 import * as screenName from '../../../../../routers/screen-name';
-import {IProgress} from '../../../../../types';
+import {URL_API} from '../../../../../helper/app-config';
+import {IProgressTopic} from '../../../../../types';
+import navigationServices from '../../../../../routers/navigation-services';
 
-export const ReportContent = () => {
-  const [progressTopic, setProgressTopic] = useState<IProgress>({
-    id: 0,
-    topicName: '',
-    fullName: '',
-    userName: '',
-    startDate: '',
-    endDate: '',
-    complete: 0,
-    point: 0,
+export const ListProgressTopic = (props: any) => {
+  const {itemRowDetail}: any = props;
+  const key = itemRowDetail.id;
+  const [progressTopic, setProgressTopic] = useState<IProgressTopic>({
     description: '',
-    title: '',
-    status: true,
+    endDate: '',
+    endRegister: '',
+    id: 1,
+    linkFile: '',
+    majorID: 1,
+    majorName: '',
+    point: 40,
+    startDate: '',
+    startRegister: '',
+    studentID: '',
+    studentName: '',
+    teacherID: 1027,
+    teacherName: '',
+    topicName: '',
+    complete: 0,
   });
-  const user: any = useRecoilState(userInfo);
-  const key: string = user[0].id;
-  const gotoFormReport = (itemRow: IProgress) => {
-    navigationServices.navigate(screenName.FormReportScreen, {
+  const gotoDetailForm = (itemRow: IProgressTopic) => {
+    navigationServices.navigate(screenName.DetailFormContainer, {
       valueReport: itemRow,
     });
   };
-  const getProgressTopic = async () => {
+  const getProgressTopic = () => {
     axios
-      .get(URL_API + '/api/ProgressOfTopic/GetForStudentID', {
+      .get(URL_API + '/api/ProgressOfTopic/GetForTopicID', {
         params: {
           id: key,
         },
@@ -48,8 +51,9 @@ export const ReportContent = () => {
     getProgressTopic();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [progressTopic]);
-  console.log('progressTopic:', progressTopic);
-  const renderItem = (item: IProgress) => {
+  console.log('progressTopicccc : ', progressTopic);
+
+  const renderItem = (item: IProgressTopic) => {
     return (
       <View style={styles.content}>
         <View style={styles.data_text}>
@@ -64,8 +68,8 @@ export const ReportContent = () => {
             <Text style={styles.data_des}>{item.endDate.substring(0, 10)}</Text>
           </View>
           <View style={styles.data}>
-            <Text style={styles.data_name}>Nội dung:</Text>
-            <Text style={styles.data_des}>{item.title}</Text>
+            <Text style={styles.data_name}>Tên đề tài:</Text>
+            <Text style={styles.data_des}>{item.topicName}</Text>
           </View>
           <View style={styles.data}>
             <Text style={styles.data_name}>Tiến độ:</Text>
@@ -75,8 +79,8 @@ export const ReportContent = () => {
         <View style={styles.btn_ctn}>
           <TouchableOpacity
             style={styles.btn}
-            onPress={() => gotoFormReport(item)}>
-            <Text style={styles.btn_text}>Chi Tiết</Text>
+            onPress={() => gotoDetailForm(item)}>
+            <Text style={styles.btn_text}>Xem</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -91,7 +95,6 @@ export const ReportContent = () => {
     </View>
   );
 };
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -121,7 +124,8 @@ const styles = StyleSheet.create({
     marginVertical: 8,
   },
   btn_ctn: {
-    alignItems: 'center',
+    marginTop: 16,
+    alignSelf: 'flex-start',
     justifyContent: 'center',
   },
   btn: {

@@ -20,6 +20,7 @@ export const AddFormComponent = () => {
   const [des, setDes] = useState<string>('');
   const [link, setLink] = useState<string>('');
   const userId = user[0].id;
+  const type = user[0].type;
   const handelOnChangeName = (enteredText: any) => {
     setName(enteredText.nativeEvent.text);
   };
@@ -29,30 +30,36 @@ export const AddFormComponent = () => {
   const handelOnChangeLink = (enteredText: any) => {
     setLink(enteredText.nativeEvent.text);
   };
-
+  const sel = parseInt(selectedValue, 10);
+  const param =
+    type === 1
+      ? {
+          topicName: name,
+          fileLink: link,
+          description: des,
+          studentID: userId,
+          specialityID: sel,
+        }
+      : {
+          topicName: name,
+          fileLink: link,
+          description: des,
+          teacherID: parseInt(user[0].teacherID, 10),
+          specialityID: sel,
+        };
+  console.log('abczyx', parseInt(user[0].teacherID, 10));
   const hanldeConfirm = () => {
-    const sel = parseInt(selectedValue, 10);
     axios
-      .post(URL_API + '/api/RegisterTopic/AddRegisterTopic', {
-        topicName: name,
-        fileLink: link,
-        description: des,
-        studentID: userId,
-        specialityID: sel,
-      })
+      .post(URL_API + '/api/RegisterTopic/AddRegisterTopic', param)
       .then(res => {
         console.log('Result: ', res.data);
         if (res.status === 200) {
         }
+        Alert.alert('Đề xuất đề tài thành công', 'Vui lòng chờ phê duyệt');
       })
       .catch(error => {
         console.log('ERROR API: ', error);
       });
-
-    Alert.alert(
-      'Đề xuất đề tài thành công',
-      'Vui lòng chờ phê duyệt của giáo viên',
-    );
     setName('');
     setDes('');
     setLink('');

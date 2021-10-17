@@ -24,3 +24,36 @@ export interface IUser {
   specialityName: string;
   specialityId: number;
 }
+
+export interface IProgress {
+  id: number;
+  topicName: string;
+  fullName: string;
+  userName: string;
+  startDate: string;
+  endDate: string;
+  complete: number;
+  point: number;
+  description: string;
+  status: boolean;
+  title: string;
+}
+
+export interface IProgressTopic {
+  description: string;
+  endDate: string;
+  endRegister: string;
+  id: number;
+  linkFile: string;
+  majorID: number;
+  majorName: string;
+  point: number;
+  startDate: string;
+  startRegister: string;
+  studentID: string;
+  studentName: string;
+  teacherID: number;
+  teacherName: string;
+  topicName: string;
+  complete: number;
+}

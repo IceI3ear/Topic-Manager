@@ -65,7 +65,7 @@ export const DetailTopic = (props: IDetaiTopicProps) => {
   return (
     <View style={styles.container}>
       <View style={styles.item_row}>
-        <Text style={styles.item_text}>Mã Đề Tài</Text>
+        <Text style={styles.item_text}>MÃ TIẾN ĐỘ</Text>
         <Text style={styles.item_content}>{itemRowDetail.id}</Text>
       </View>
       <View style={styles.item_row}>

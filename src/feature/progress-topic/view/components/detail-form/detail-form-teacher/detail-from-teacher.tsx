@@ -8,40 +8,32 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native';
-import {URL_API} from '../../../../helper/app-config';
+import {URL_API} from '../../../../../../helper/app-config';
 
-export const DetailForm = (props: any) => {
+export const DetailFormTeacher = (props: any) => {
   const {itemRowDetail} = props;
-  const [des, setDes] = useState<string>('');
-  const [link, setLink] = useState<string>('');
-  const handelOnChangeDes = (enteredText: any) => {
-    setDes(enteredText.nativeEvent.text);
-  };
-  const handelOnChangeLink = (enteredText: any) => {
-    setLink(enteredText.nativeEvent.text);
+  const [comp, setComp] = useState<number>(itemRowDetail.complete);
+  const handelOnChangeComp = (enteredText: any) => {
+    setComp(enteredText.nativeEvent.text);
   };
 
   const hanldeConfirm = () => {
     axios
-      .post(URL_API + '/api/ProgressOfTopic/ChangeInfoProgressInStudent', {
+      .post(URL_API + '/api/ProgressOfTopic/ChangeInfoProgressInTeacher', {
         progressID: itemRowDetail.id,
-        fileLink: link,
-        description: des,
+        complete: comp,
       })
       .then(res => {
         console.log('Result: ', res.data);
         if (res.status === 200) {
         }
-        Alert.alert('Gửi thành công', 'Vui lòng chờ phê duyệt của giáo viên');
+        Alert.alert('Gửi thành công');
       })
       .catch(error => {
         console.log('ERROR API: ', error);
       });
-
-    setDes('');
-    setLink('');
   };
-
+  console.log('itemRowDetailllllll:', itemRowDetail);
   return (
     <View style={styles.item_ctn}>
       <View style={styles.item_input}>
@@ -58,18 +50,18 @@ export const DetailForm = (props: any) => {
       </View>
       <View style={styles.item_input}>
         <Text style={styles.text}>Mô TẢ</Text>
-        <TextInput
-          style={styles.textfieldGVHD}
-          onChange={handelOnChangeDes}
-          value={des}
-        />
+        <Text style={styles.text_des}>{itemRowDetail.desciption}</Text>
       </View>
       <View style={styles.item_input}>
         <Text style={styles.text}>LINK FILE</Text>
+        <Text style={styles.text_des}>{itemRowDetail.linkFile}</Text>
+      </View>
+      <View style={styles.item_input}>
+        <Text style={styles.text}>Đánh giá (%)</Text>
         <TextInput
-          style={styles.textfield}
-          onChange={handelOnChangeLink}
-          value={link}
+          style={styles.textfieldGVHD}
+          onChange={handelOnChangeComp}
+          value={String(comp)}
         />
       </View>
       <View style={styles.btn_ctn}>

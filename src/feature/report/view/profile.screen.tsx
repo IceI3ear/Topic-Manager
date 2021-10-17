@@ -3,6 +3,7 @@ import {StyleSheet, View} from 'react-native';
 import {useRecoilState} from 'recoil';
 import {HeaderTitleComponent} from '../../../libraries/header_title/header-title.component';
 import {userInfo} from '../../../recoil/recoil-state';
+import {ProgressScreen} from '../../progress';
 import {ReportContent} from './component/report-content/content-reportComponent';
 
 export const ReportContainer = () => {
@@ -16,7 +17,7 @@ export const ReportContainer = () => {
   ) : (
     <View style={styles.container}>
       <HeaderTitleComponent title="PHÊ DUYỆT TIẾN ĐỘ" onback={false} />
-      <ReportContent />
+      <ProgressScreen />
     </View>
   );
 };

@@ -11,6 +11,8 @@ import {UserScreen} from '../feature/user';
 import {TopicUserScreen} from '../feature/topic-user';
 import {AcpectTopicScreen} from '../feature/acpect-topic/view';
 import {ProgressScreen} from '../feature/progress';
+import {ProgressTopicScreen} from '../feature/progress-topic';
+import {DetailFormContainer} from '../feature/progress-topic/view/components/detail-form/detail-form';
 
 const mainStack = createStackNavigator(
   {
@@ -24,6 +26,8 @@ const mainStack = createStackNavigator(
     [screenName.TopicUserScreen]: TopicUserScreen,
     [screenName.AcpectTopicScreen]: AcpectTopicScreen,
     [screenName.ProgressScreen]: ProgressScreen,
+    [screenName.ProgressTopicScreen]: ProgressTopicScreen,
+    [screenName.DetailFormContainer]: DetailFormContainer,
   },
   {initialRouteName: screenName.LoginScreen, mode: 'card', headerMode: 'none'},
 );
