@@ -43,7 +43,7 @@ export const DetailTopicUser = () => {
       </View>
       <View style={styles.item_rows}>
         <Text style={styles.item_name}>TIẾN ĐỘ</Text>
-        <Text style={styles.item_des}>123</Text>
+        <Text style={styles.item_des}>{Detail.compolete}0%</Text>
       </View>
       <View style={styles.item_rows}>
         <Text style={styles.item_name}>GVHD</Text>

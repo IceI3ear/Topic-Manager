@@ -16,17 +16,28 @@ import {DetailFormContainer} from '../feature/progress-topic/view/components/det
 
 const mainStack = createStackNavigator(
   {
+    //màn đĂng nhập
     [screenName.LoginScreen]: LoginScreen,
+    // đĂng kí đề tài
     [screenName.RegisterScreen]: RegisterScreen,
+    // chân màn - tab menu
     [screenName.BottomNavigationTab]: BottomNavigationTab,
+    // đỀ xuất đề tài
     [screenName.ProposeScreen]: ProposeScreen,
+    // chi tiết đỀ tài
     [screenName.TopicDetailScreen]: TopicDetailScreen,
+    // form báo cáo
     [screenName.FormReportScreen]: FormReportScreen,
+    // cá nhân
     [screenName.UserScreen]: UserScreen,
+    // đề tài cá nhan
     [screenName.TopicUserScreen]: TopicUserScreen,
+    // phê duyệt đề tài
     [screenName.AcpectTopicScreen]: AcpectTopicScreen,
     [screenName.ProgressScreen]: ProgressScreen,
+    // tiến độ
     [screenName.ProgressTopicScreen]: ProgressTopicScreen,
+    // form chi tiết
     [screenName.DetailFormContainer]: DetailFormContainer,
   },
   {initialRouteName: screenName.LoginScreen, mode: 'card', headerMode: 'none'},

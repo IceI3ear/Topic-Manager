@@ -8,6 +8,7 @@ export interface ITopic {
   topicName: string;
   studentID: string;
   teacherName: string;
+  point: any;
 }
 
 export interface ILogin {

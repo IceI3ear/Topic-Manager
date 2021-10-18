@@ -74,10 +74,6 @@ export const DetailUser = (props: DetailUserProps) => {
         <Text style={styles.item_name}>TÊN GIẢNG VIÊN</Text>
         <Text style={styles.item_des}>{user.fullName}</Text>
       </View>
-      <View style={styles.item_rows}>
-        <Text style={styles.item_name}>KHOA</Text>
-        <Text style={styles.item_des}>{user.majorName}</Text>
-      </View>
       <View style={styles.btn_ctn}>
         <TouchableOpacity style={styles.btn} onPress={gotoLogin}>
           <Text style={styles.btn_text}>Đăng xuất</Text>

@@ -12,8 +12,8 @@ import {URL_API} from '../../../../helper/app-config';
 
 export const DetailForm = (props: any) => {
   const {itemRowDetail} = props;
-  const [des, setDes] = useState<string>('');
-  const [link, setLink] = useState<string>('');
+  const [des, setDes] = useState<string>(itemRowDetail.description);
+  const [link, setLink] = useState<string>(itemRowDetail.linkFile);
   const handelOnChangeDes = (enteredText: any) => {
     setDes(enteredText.nativeEvent.text);
   };
@@ -25,7 +25,7 @@ export const DetailForm = (props: any) => {
     axios
       .post(URL_API + '/api/ProgressOfTopic/ChangeInfoProgressInStudent', {
         progressID: itemRowDetail.id,
-        fileLink: link,
+        linkFile: link,
         description: des,
       })
       .then(res => {
@@ -37,10 +37,8 @@ export const DetailForm = (props: any) => {
       .catch(error => {
         console.log('ERROR API: ', error);
       });
-
-    setDes('');
-    setLink('');
   };
+  console.log('itemRowDetailllll : ', itemRowDetail);
 
   return (
     <View style={styles.item_ctn}>
@@ -53,11 +51,11 @@ export const DetailForm = (props: any) => {
         <Text style={styles.text_des}>{itemRowDetail.topicName}</Text>
       </View>
       <View style={styles.item_input}>
-        <Text style={styles.text}>TÊN ĐỀ TÀI</Text>
+        <Text style={styles.text}>NỘI DUNG</Text>
         <Text style={styles.text_des}>{itemRowDetail.title}</Text>
       </View>
       <View style={styles.item_input}>
-        <Text style={styles.text}>Mô TẢ</Text>
+        <Text style={styles.text}>MÔ TẢ</Text>
         <TextInput
           style={styles.textfieldGVHD}
           onChange={handelOnChangeDes}

@@ -45,7 +45,7 @@ export const DetailFormTeacher = (props: any) => {
         <Text style={styles.text_des}>{itemRowDetail.topicName}</Text>
       </View>
       <View style={styles.item_input}>
-        <Text style={styles.text}>TÊN ĐỀ TÀI</Text>
+        <Text style={styles.text}>NỘI DUNG</Text>
         <Text style={styles.text_des}>{itemRowDetail.title}</Text>
       </View>
       <View style={styles.item_input}>

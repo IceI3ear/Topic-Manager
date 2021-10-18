@@ -34,6 +34,7 @@ const topicData = atom({
     teacherName: '',
     topicName: '',
     studentID: '',
+    point: 0,
   },
 });
 export {topicData};
