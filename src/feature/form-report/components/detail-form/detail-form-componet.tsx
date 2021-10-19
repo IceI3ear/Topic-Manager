@@ -57,6 +57,8 @@ export const DetailForm = (props: any) => {
       <View style={styles.item_input}>
         <Text style={styles.text}>MÔ TẢ</Text>
         <TextInput
+          multiline={true}
+          numberOfLines={2}
           style={styles.textfieldGVHD}
           onChange={handelOnChangeDes}
           value={des}
@@ -65,6 +67,8 @@ export const DetailForm = (props: any) => {
       <View style={styles.item_input}>
         <Text style={styles.text}>LINK FILE</Text>
         <TextInput
+          multiline={true}
+          numberOfLines={2}
           style={styles.textfield}
           onChange={handelOnChangeLink}
           value={link}

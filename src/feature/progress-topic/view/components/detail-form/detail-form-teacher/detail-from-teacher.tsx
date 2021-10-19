@@ -7,6 +7,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   Alert,
+  Linking,
 } from 'react-native';
 import {URL_API} from '../../../../../../helper/app-config';
 
@@ -33,6 +34,17 @@ export const DetailFormTeacher = (props: any) => {
         console.log('ERROR API: ', error);
       });
   };
+
+  const OpenURLButton = async (url: string) => {
+    const supported = await Linking.canOpenURL(url);
+
+    if (supported) {
+      await Linking.openURL(url);
+    } else {
+      Alert.alert(`Don't know how to open this URL: ${url}`);
+    }
+  };
+
   console.log('itemRowDetailllllll:', itemRowDetail);
   return (
     <View style={styles.item_ctn}>
@@ -50,11 +62,17 @@ export const DetailFormTeacher = (props: any) => {
       </View>
       <View style={styles.item_input}>
         <Text style={styles.text}>Mô TẢ</Text>
-        <Text style={styles.text_des}>{itemRowDetail.desciption}</Text>
+        <Text style={styles.text_des}>{itemRowDetail.description}</Text>
       </View>
       <View style={styles.item_input}>
         <Text style={styles.text}>LINK FILE</Text>
-        <Text style={styles.text_des}>{itemRowDetail.linkFile}</Text>
+        <Text
+          style={styles.text_des_link}
+          onPress={() => {
+            OpenURLButton(itemRowDetail.linkFile);
+          }}>
+          {itemRowDetail.linkFile}
+        </Text>
       </View>
       <View style={styles.item_input}>
         <Text style={styles.text}>Đánh giá (%)</Text>
@@ -99,6 +117,12 @@ const styles = StyleSheet.create({
     width: '70%',
     height: '150%',
     marginHorizontal: '10%',
+  },
+  text_des_link: {
+    width: '70%',
+    height: '150%',
+    marginHorizontal: '10%',
+    color: '#2980b9',
   },
   item_ctn: {
     marginTop: 30,

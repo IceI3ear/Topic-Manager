@@ -21,13 +21,13 @@ export const AddFormComponent = () => {
   const [link, setLink] = useState<string>('');
   const userId = user[0].id;
   const type = user[0].type;
-  const handelOnChangeName = (enteredText: any) => {
+  const handelOnChangeName = (enteredText: any): void => {
     setName(enteredText.nativeEvent.text);
   };
-  const handelOnChangeDes = (enteredText: any) => {
+  const handelOnChangeDes = (enteredText: any): void => {
     setDes(enteredText.nativeEvent.text);
   };
-  const handelOnChangeLink = (enteredText: any) => {
+  const handelOnChangeLink = (enteredText: any): void => {
     setLink(enteredText.nativeEvent.text);
   };
   const sel = parseInt(selectedValue, 10);
@@ -48,22 +48,37 @@ export const AddFormComponent = () => {
           specialityID: sel,
         };
   console.log('abczyx', parseInt(user[0].teacherID, 10));
-  const hanldeConfirm = () => {
-    axios
-      .post(URL_API + '/api/RegisterTopic/AddRegisterTopic', param)
-      .then(res => {
-        console.log('Result: ', res.data);
-        if (res.status === 200) {
-        }
-        Alert.alert('Đề xuất đề tài thành công', 'Vui lòng chờ phê duyệt');
-      })
-      .catch(error => {
-        console.log('ERROR API: ', error);
-      });
-    setName('');
-    setDes('');
-    setLink('');
+  const checkValid = (): boolean => {
+    let countError = false;
+    if (name.trim() === '' || des.trim() === '' || link.trim() === '') {
+      countError = true;
+    } else {
+      countError = false;
+    }
+
+    return countError;
   };
+  const hanldeConfirm = (): void => {
+    if (checkValid() === false) {
+      axios
+        .post(URL_API + '/api/RegisterTopic/AddRegisterTopic', param)
+        .then(res => {
+          console.log('Result: ', res.data);
+          if (res.status === 200) {
+          }
+          Alert.alert('Đề xuất đề tài thành công', 'Vui lòng chờ phê duyệt');
+        })
+        .catch(error => {
+          console.log('ERROR API: ', error);
+        });
+      setName('');
+      setDes('');
+      setLink('');
+    } else {
+      Alert.alert('Đề xuất thất bại', 'Vui lòng nhập đủ dữ liệu');
+    }
+  };
+  console.log('userrrrrrr', typeof type);
 
   return (
     <View style={styles.item_ctn}>

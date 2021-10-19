@@ -17,7 +17,7 @@ const gotoDetailUserTopic = () => {
 export const DetailUser = (props: DetailUserProps) => {
   const {user} = props;
   const type: number = user.type;
-  console.log('userDetail: ', user);
+  console.log('userDetailllll: ', user);
   return type === 1 ? (
     <View style={styles.container}>
       <Image
